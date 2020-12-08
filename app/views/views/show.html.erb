@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Product:</strong>
+  <%= @view.product_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @view.user_id %>
+</p>
+
+<p>
+  <strong>Viewed at:</strong>
+  <%= @view.viewed_at %>
+</p>
+
+<%= link_to 'Edit', edit_view_path(@view) %> |
+<%= link_to 'Back', views_path %>
