@@ -1,11 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-	describe "validations" do
-	  	let(:user) { FactoryBot.build(:user)}
-	  	it "should have a email" do 
-	  		user.email = nil
-	  	    expect(user).to_not be_valid
-		end
+	describe "Validations" do
+	  it {should validate_presence_of(:email)}
+	  it {should validate_presence_of(:vendor)}
+	  it {should validate_presence_of(:name)}
 	end
 end
