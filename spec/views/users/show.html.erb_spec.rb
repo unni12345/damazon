@@ -1,20 +1,20 @@
-require 'rails_helper'
+# require 'rails_helper'
 
-RSpec.describe "users/show", type: :view do
-  before(:each) do
-    @user = assign(:user, User.create!(
-      name: "Name",
-      bio: "Bio",
-      image_url: "Image Url",
-      email: "Email"
-    ))
-  end
+# RSpec.describe "users/show", type: :view do
+#   before(:each) do
+#     @user = assign(:user, User.create!(
+#       name: "Name",
+#       bio: "Bio",
+#       image_url: "Image Url",
+#       email: "Email"
+#     ))
+#   end
 
-  it "renders attributes in <p>" do
-    render
-    expect(rendered).to match(/Name/)
-    expect(rendered).to match(/Bio/)
-    expect(rendered).to match(/Image Url/)
-    expect(rendered).to match(/Email/)
-  end
-end
+#   it "renders attributes in <p>" do
+#     render
+#     expect(rendered).to match(/Name/)
+#     expect(rendered).to match(/Bio/)
+#     expect(rendered).to match(/Image Url/)
+#     expect(rendered).to match(/Email/)
+#   end
+# end
