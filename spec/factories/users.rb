@@ -1,8 +1,13 @@
 FactoryBot.define do
   factory :user do
-    name { "MyString" }
-    bio { "MyString" }
-    image_url { "MyString" }
-    email { "MyString" }
+    name { Faker::Name.name }
+    bio { Faker::Lorem.sentence}
+    image_url { Faker::Internet.url }
+    email { Faker::Internet.email }
+    vendor {false}
+
+    trait :vendor do
+      vendor {true}
+    end
   end
 end

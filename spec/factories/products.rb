@@ -1,8 +1,10 @@
 FactoryBot.define do
   factory :product do
-    name { "MyString" }
-    description { "MyString" }
-    image_url { "MyString" }
-    discount { 1 }
+    name { Faker::Name.name }
+    description { Faker::Lorem.sentence }
+    image_url { Faker::Internet.url }
+    discount { Faker::Number.number(digits: 1) }
+    association :user, :vendor
+    category
   end
 end

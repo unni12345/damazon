@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :view do
-    product { nil }
-    user { nil }
-    viewed_at { "2020-12-08 23:32:18" }
+    product
+    user 
+    viewed_at { Faker::Date.in_date_period}
   end
 end
