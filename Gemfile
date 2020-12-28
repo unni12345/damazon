@@ -45,6 +45,7 @@ group :development do
   gem 'capybara', '~> 3.34'
   gem 'shoulda-matchers', '~> 4.4', '>= 4.4.1'
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  gem 'database_cleaner-active_record', '~> 1.8'
 end
 
 group :test do
@@ -58,6 +59,7 @@ group :test do
   gem 'database_cleaner', '~> 1.8', '>= 1.8.5'
   gem 'shoulda-matchers', '~> 4.4', '>= 4.4.1'
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  gem 'database_cleaner-active_record', '~> 1.8'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
