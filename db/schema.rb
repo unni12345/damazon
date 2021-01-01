@@ -10,11 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_28_055922) do
+ActiveRecord::Schema.define(version: 2021_01_01_133438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "line_item_id", null: false
+    t.uuid "product_id", null: false
+    t.index ["line_item_id"], name: "index_carts_on_line_item_id"
+    t.index ["product_id"], name: "index_carts_on_product_id"
+  end
 
   create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
@@ -22,6 +31,28 @@ ActiveRecord::Schema.define(version: 2020_12_28_055922) do
     t.integer "discount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "line_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "quantity"
+    t.uuid "product_id", null: false
+    t.uuid "cart_id", null: false
+    t.uuid "order_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+    t.index ["product_id"], name: "index_line_items_on_product_id"
+  end
+
+  create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.text "address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "line_item_id", null: false
+    t.index ["line_item_id"], name: "index_orders_on_line_item_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -86,6 +117,13 @@ ActiveRecord::Schema.define(version: 2020_12_28_055922) do
     t.index ["user_id"], name: "index_views_on_user_id"
   end
 
+  add_foreign_key "carts", "line_items"
+  add_foreign_key "carts", "products"
+  add_foreign_key "line_items", "carts"
+  add_foreign_key "line_items", "orders"
+  add_foreign_key "line_items", "products"
+  add_foreign_key "orders", "line_items"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users"
   add_foreign_key "purchases", "products"
